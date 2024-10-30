@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 import requests
 
-from snookxporter.dataclasses import User, Match
+from snookxporter.dataclasses import Match, User
 
 
 class SnookAppClient:

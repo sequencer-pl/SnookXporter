@@ -2,13 +2,10 @@ from datetime import datetime
 from unittest import TestCase
 
 import responses
-
-from snookxporter.clients.snookapp import SnookAppClient
-
-
 from freezegun import freeze_time
 
-from snookxporter.dataclasses import User, Match
+from snookxporter.clients.snookapp import SnookAppClient
+from snookxporter.dataclasses import Match, User
 
 
 class SnookAppTest(TestCase):

@@ -20,8 +20,12 @@ unit-tests:
 lint:
 	pylint --max-line-length $(MAX_LINE_LENGTH) snookxporter tests
 
+.PHONY: isort
+isort:
+	isort --check snookxporter tests
+
 .PHONY: tests
-tests: type-check unit-tests
+tests: isort type-check unit-tests
 
 .PHONY: isort-fix
 isort-fix:
