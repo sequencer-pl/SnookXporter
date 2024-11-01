@@ -12,4 +12,4 @@ jobs:
 
       - name: Run a script
         run: |
-            echo "Script run: snookxporter --config ${{ vars.PLAYERS }}"
+            echo "Script run: snookxporter --config ${{ toJson(vars.PLAYERS) }}"
