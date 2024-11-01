@@ -11,4 +11,5 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run a script
-        run: echo "Script run: snookxporter --config ${{ vars.PLAYERS }}"
+        run: |
+            echo "Script run: snookxporter --config ${{ vars.PLAYERS }}"
