@@ -4,15 +4,17 @@ from unittest import TestCase
 import responses
 from freezegun import freeze_time
 
-from snookxporter.clients.snookapp import SnookAppClient
-from snookxporter.dataclasses import Match, User
+from snookxporter.clients.snookapp import SnookAppClient, SnookAppConfig
+from snookxporter.entities import Match, Player
 
 
-class SnookAppTest(TestCase):
+class SnookAppClientTest(TestCase):
     def setUp(self):
-        self.base_url = "http://snook.app.url"
-        self.endpoint = "/api"
-        self.client = SnookAppClient(base_url=self.base_url, endpoint=self.endpoint)
+        self.config = SnookAppConfig(
+            base_url="http://snook.app.url",
+            bookings_endpoint="/api"
+        )
+        self.client = SnookAppClient(config=self.config)
 
         self.sample_response = {
             "bookings": {
@@ -102,34 +104,52 @@ class SnookAppTest(TestCase):
             }
         }
 
-    @responses.activate
-    @freeze_time('1955-11-05')
-    def test_get_arriving_matches_returns_list_of_users_games(self):
-        url = f"{self.base_url}{self.endpoint}?from=1955-11-04&to=1955-11-19"
-        responses.add(responses.GET, url, json=self.sample_response, status=200)
-        users = [
-            User(firstName='Marty', lastName='McFly'),
-            User(firstName='Emmet', lastName='Brown'),
+
+    def test_extract_players_matches_from_schedule_returns_only_players_related_matches(self):
+        players = [
+            Player(first_name="Marty", last_name="McFly"),
+            Player(first_name="Emmet", last_name="Brown"),
         ]
+        biff_tannen = Player(first_name="Biff", last_name="Tannen")
         expected_matches = [
             Match(
-                host=User(firstName='Marty', lastName='McFly'),
-                guest=User(firstName='Emmet', lastName='Brown'),
-                start=datetime(year=1955, month=11, day=4, hour=6, minute=30),
-                end=datetime(year=1955, month=11, day=4, hour=7, minute=30),
+                host=players[0],
+                guest=players[1],
+                start=datetime(1955, 11, 4, 6, 30),
+                end=datetime(1955, 11, 4, 7, 30),
                 host_score=3,
                 guest_score=2,
+                table=1,
             ),
             Match(
-                host=User(firstName='Marty', lastName='McFly'),
-                guest=User(firstName='Biff', lastName='Tannen'),
-                start=datetime(year=1955, month=11, day=5, hour=16, minute=30),
-                end=datetime(year=1955, month=11, day=5, hour=20, minute=0),
+                host=players[0],
+                guest=biff_tannen,
+                start=datetime(1955, 11, 5, 16, 30),
+                end=datetime(1955, 11, 5, 20, 0),
                 host_score=None,
                 guest_score=None,
-            ),
+            )
         ]
 
-        matches = self.client.get_arriving_matches_for(users=users)
+        matches = self.client.extract_players_matches_from_schedule(
+            players=players,
+            schedule=self.sample_response["bookings"]["days"]["SNOOKER"]
+        )
 
         self.assertListEqual(expected_matches, matches)
+
+    @responses.activate
+    @freeze_time("1955-11-05")
+    def test_get_schedule_does_request_and_returns_schedule_only(self):
+        responses.get(
+            url=f"{self.config.url}?from=1955-11-02&to=1955-11-11",
+            json=self.sample_response,
+            status=200
+        )
+
+        schedule = self.client.get_schedule(
+            past_days=3,
+            future_days=6
+        )
+
+        self.assertListEqual(self.sample_response["bookings"]["days"]["SNOOKER"], schedule)
