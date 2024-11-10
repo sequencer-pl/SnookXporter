@@ -1,0 +1,26 @@
+name: Manual synchronize
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Poetry install
+        run: pip install poetry
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Run a script
+        run: |
+            poetry run snookxporter --token '${{ secrets.CALENDAR_TOKEN }}'
