@@ -161,11 +161,4 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# Logs
-logs/
 
-# Secrets, passwords, tokens etc.
-secrets/*
-
-# Generated Gcal token
-secrets/token.json
