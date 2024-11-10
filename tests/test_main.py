@@ -32,8 +32,8 @@ class MainTest(TestCase):
             past_days=1, future_days=2
         )
         m_google_calendar_client_class.assert_has_calls([
-            call(config=GoogleCalendarConfig(id="11", players=[])),
-            call(config=GoogleCalendarConfig(id="22", players=[]))
+            call(config=GoogleCalendarConfig(id="11", players=[]), token={}),
+            call(config=GoogleCalendarConfig(id="22", players=[]), token={})
         ])
         m_first_calendar_client.get_events.assert_called_once_with(past_days=1, future_days=2)
         m_second_calendar_client.get_events.assert_called_once_with(past_days=1, future_days=2)
