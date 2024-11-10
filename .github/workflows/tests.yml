@@ -10,5 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Poetry install
+        run: pip install poetry
+
       - name: Run tests
         run: make tests

@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Poetry install
+        run: pip install poetry
+
       - name: Run a script
         run: |
             poetry run snookxporter --token '${{ secrets.CALENDAR_TOKEN }}'
