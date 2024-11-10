@@ -1,7 +1,8 @@
 name: Cron scheduled synchronize
 
 on:
-  cron: '0 * * * *'
+  schedule:
+    - cron: '0 * * * *'
 
 jobs:
   sync:
