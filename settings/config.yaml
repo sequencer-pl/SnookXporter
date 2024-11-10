@@ -1,0 +1,13 @@
+snook_app:
+  base_url: https://snookapp.azurewebsites.net
+  bookings_endpoint: /api/decider/bookings/66ef3cebb6fa0e2e48be0716
+
+calendars:
+  - id: "d456840982333685c40199c49d7a759c27d543839c285d010bc3d4bf8eadbad4@group.calendar.google.com"
+    players:
+      - first_name: Rafał
+        last_name: Leszcz
+        alias: RL
+      - first_name: Tomasz
+        last_name: Kubera
+        alias: TK
