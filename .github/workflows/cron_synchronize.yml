@@ -1,7 +1,7 @@
-name: Synchronize
+name: Cron scheduled synchronize
 
 on:
-  workflow_dispatch:
+  cron: '0 * * * *'
 
 jobs:
   sync:
@@ -12,4 +12,4 @@ jobs:
 
       - name: Run a script
         run: |
-            echo "Script run: snookxporter --config ${{ toJson(vars.PLAYERS) }}"
+            poetry run snookxporter --token '${{ secrets.CALENDAR_TOKEN }}'

@@ -1,3 +1,4 @@
+import json
 import logging
 from datetime import datetime
 
@@ -18,17 +19,21 @@ logger = logging.getLogger(__name__)
 @click.option('--future-days',
               help="Number of future days to synchronize.",
               default=90, type=int)
-def run(past_days, future_days) -> None:
+@click.option('--token',
+              help="Google Calendar token.",
+              default = '{}')
+def run(past_days, future_days, token) -> None:
 
     config_parser = ConfigParser()
     snook_app_config = config_parser.get_snook_app_config()
     calendars_config = config_parser.get_calendars_config()
-    snook_app_client = SnookAppClient(config=snook_app_config)
+    token = json.loads(token)
 
+    snook_app_client = SnookAppClient(config=snook_app_config)
     decider_schedule = snook_app_client.get_schedule(past_days=past_days, future_days=future_days)
 
     for calendar in calendars_config:
-        calendar_client = GoogleCalendarClient(config=calendar)
+        calendar_client = GoogleCalendarClient(config=calendar, token=token)
 
         calendar_events = calendar_client.get_events(past_days=past_days, future_days=future_days)
         logger.debug(f"Calendar events: {calendar_events}")
