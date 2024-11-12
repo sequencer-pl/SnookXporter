@@ -60,7 +60,7 @@ class GoogleCalendarClient:
                     guest_score=self._parse_description(item['description'])['guest_score'],
                     table=self._parse_description(item['description'])['table']
                 ))
-            except (IndexError, ValueError) as e:
+            except (IndexError, ValueError, KeyError) as e:
                 logger.warning(f"Problem with parsing calendar item: {item}: Error: {e}")
                 matches.append(Match.get_match_to_delete_from_calendar(item['id']))
         return matches
