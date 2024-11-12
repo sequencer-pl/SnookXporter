@@ -4,7 +4,14 @@ snook_app:
 
 calendars:
   - id: "d456840982333685c40199c49d7a759c27d543839c285d010bc3d4bf8eadbad4@group.calendar.google.com"
-    secret_name: "SNOOKXPORTER"
+    players:
+      - first_name: Rafał
+        last_name: Leszcz
+        alias: RL
+      - first_name: Tomasz
+        last_name: Kubera
+        alias: TK
+  - id: "0aedf3e0909f7a18fa1c865ae0fa2c3f97cc86c58b40fd90dfdd31b926c6131c@group.calendar.google.com"
     players:
       - first_name: Rafał
         last_name: Leszcz
