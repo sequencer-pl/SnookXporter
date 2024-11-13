@@ -1,13 +1,11 @@
 import json
 import logging
-from datetime import datetime
 
 import click
 
 from settings.config import ConfigParser
 from snookxporter.clients.google.calendar import GoogleCalendarClient
 from snookxporter.clients.snookapp import SnookAppClient
-from snookxporter.entities import Match, Player
 
 logger = logging.getLogger(__name__)
 

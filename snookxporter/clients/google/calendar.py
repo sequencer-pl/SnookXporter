@@ -36,8 +36,12 @@ class GoogleCalendarClient:
 
     def get_events(self, past_days: int, future_days: int) -> list[Match]:
         service = build('calendar', 'v3', credentials=self.credentials)
-        _from = datetime.today() - timedelta(days=past_days)
-        _to = _from + timedelta(days=future_days)
+        _from = (datetime.today() - timedelta(days=past_days)).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+        _to = (_from + timedelta(days=future_days)).replace(
+            hour=23, minute=59, second=59, microsecond=999999
+        )
         logger.info(f'Getting calendar {self.calendar_id} events from {_from} to {_to}')
         events_result = service.events().list(  # pylint: disable=maybe-no-member
             calendarId=self.calendar_id,
