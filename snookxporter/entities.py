@@ -59,7 +59,7 @@ class Match:
             object.__setattr__(self, 'end', self.end.replace(tzinfo=None))
 
     def _is_finished(self):
-        return self.host_score and self.guest_score
+        return self.host_score is not None and self.guest_score is not None
 
     def _get_vs_or_score(self):
         return f"{self.host_score}:{self.guest_score}" if self._is_finished() else "v"
