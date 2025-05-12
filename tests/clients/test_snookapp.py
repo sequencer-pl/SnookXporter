@@ -28,8 +28,8 @@ class SnookAppClientTest(TestCase):
                                     "number": 1,
                                     "bookingItems": [
                                         {
-                                            "timeFrom": "06:30:00",
-                                            "timeTo": "07:30:00",
+                                            "timeFrom": "1955-11-04T06:30:00",
+                                            "timeTo": "1955-11-04T07:30:00",
                                             "match": {
                                                 "host": {
                                                     "firstName": "Marty",
@@ -57,8 +57,8 @@ class SnookAppClientTest(TestCase):
                                     "number": 1,
                                     "bookingItems": [
                                         {
-                                            "timeFrom": "16:30:00",
-                                            "timeTo": "20:00:00",
+                                            "timeFrom": "1955-11-05T16:30:00",
+                                            "timeTo": "1955-11-05T20:00:00",
                                             "match": {
                                                 "host": {
                                                     "firstName": "Marty",
@@ -82,8 +82,8 @@ class SnookAppClientTest(TestCase):
                                     "number": 1,
                                     "bookingItems": [
                                         {
-                                            "timeFrom": "08:30:00",
-                                            "timeTo": "10:00:00",
+                                            "timeFrom": "1955-11-15T08:30:00",
+                                            "timeTo": "1955-11-15T10:00:00",
                                             "match": {
                                                 "host": {
                                                     "firstName": "George",

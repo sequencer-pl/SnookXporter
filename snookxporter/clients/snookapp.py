@@ -19,7 +19,7 @@ class SnookAppClient:
     def __init__(self, config: SnookAppConfig):
         self.config = config
         self.date_format = "%Y-%m-%d"
-        self.datetime_format = "%Y-%m-%d %H:%M:%S"
+        self.datetime_format = "%Y-%m-%dT%H:%M:%S"
 
     def extract_players_matches_from_schedule(self, schedule: list[dict], players: list[Player]) -> list[Match]:
         return [
@@ -34,8 +34,8 @@ class SnookAppClient:
                     last_name=item['match']['guest']['lastName'],
                     alias=self._get_alias_for_player(item['match']['guest'], players=players),
                 ),
-                start=datetime.strptime(f"{match['date']} {item['timeFrom']}", self.datetime_format),
-                end=datetime.strptime(f"{match['date']} {item['timeTo']}", self.datetime_format),
+                start=datetime.strptime(f"{item['timeFrom']}", self.datetime_format),
+                end=datetime.strptime(f"{item['timeTo']}", self.datetime_format),
                 host_score=item['match']['matchResult']['gamesHost'] if item['match'].get('matchResult') else None,
                 guest_score=item['match']['matchResult']['gamesGuest'] if item['match'].get('matchResult') else None,
                 table=court['number']
