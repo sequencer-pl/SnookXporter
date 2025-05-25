@@ -1,3 +1,4 @@
+import logging
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 
@@ -43,7 +44,10 @@ class SnookAppClient:
             for match in schedule
             for court in match['matchCourts']
             for item in court['bookingItems']
-            if item.get('match') and self._is_host_or_guest_in_players(
+            if item.get('match')
+            and item.get('match').get('host')
+            and item.get('match').get('guest')
+            and self._is_host_or_guest_in_players(
                 host=item['match']['host'],
                 guest=item['match']['guest'],
                 players=players
