@@ -17,11 +17,11 @@ jobs:
           python-version: "3.13"
 
       - name: Poetry install
-        run: pip install poetry
+        run: pip install uv
 
       - name: Install dependencies
         run: make install
 
       - name: Run a script
         run: |
-            poetry run snookxporter --token '${{ secrets.CALENDAR_TOKEN }}'
+            uv run snookxporter --token '${{ secrets.CALENDAR_TOKEN }}'
