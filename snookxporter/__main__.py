@@ -3,9 +3,9 @@ import logging
 
 import click
 
-from settings.config import ConfigParser
 from snookxporter.clients.google.calendar import GoogleCalendarClient
 from snookxporter.clients.snookapp import SnookAppClient
+from snookxporter.settings.config import ConfigParser
 
 logger = logging.getLogger(__name__)
 

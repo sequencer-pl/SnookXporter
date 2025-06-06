@@ -38,10 +38,10 @@ the SnookApp API and syncs them to your Google Calendar.
 
 ```
 snookxporter/
-├── logs/                  # Logging output
-├── settings/              # Configuration, including Google API setup
-├── secrets/               # Secrets to Google Calendar API
-├── snookxporter/main.py   # Entry point
+├── logs/                     # Logging output
+├── secrets/                  # Secrets to Google Calendar API
+├── snookxporter/settings/    # Configuration, including Google API setup
+├── snookxporter/__main__.py  # Entry point
 Makefile
 pyproject.toml
 README.md

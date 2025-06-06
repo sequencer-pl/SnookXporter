@@ -1,36 +1,37 @@
-MAX_LINE_LENGTH = 120
+MAX_LINE_LENGTH = 119
+MIN_TESTS_COVERAGE = 100
 
 .PHONY: install
 install:
-	poetry install --only main
+	uv sync
 
 .PHONY: install-dev
 install-dev:
-	poetry install
+	uv sync --group=dev
 
 .PHONY: type-check
 type-check:
-	poetry run mypy snookxporter tests
+	uv run mypy snookxporter tests
 
 .PHONY: unit-tests
 unit-tests:
-	poetry run pytest --cov=snookxporter --cov-fail-under=100 --cov-report term-missing tests
+	uv run pytest --cov=snookxporter --cov-fail-under=$(MIN_TESTS_COVERAGE) --cov-report term-missing tests
 
 .PHONY: lint
 lint:
-	pylint --max-line-length $(MAX_LINE_LENGTH) snookxporter tests
+	uv --max-line-length $(MAX_LINE_LENGTH) snookxporter tests
 
 .PHONY: isort-check
 isort-check:
-	poetry run isort -l $(MAX_LINE_LENGTH) --check snookxporter tests
+	uv run isort -l $(MAX_LINE_LENGTH) --check snookxporter tests
 
 .PHONY: tests
 tests: isort-check type-check unit-tests
 
 .PHONY: isort
 isort:
-	poetry run isort -l $(MAX_LINE_LENGTH) snookxporter tests
+	uv run isort -l $(MAX_LINE_LENGTH) snookxporter tests
 
 .PHONY: run
 run:
-	poetry run snookxporter
+	uv run snookxporter

@@ -1,7 +1,7 @@
 import logging
 import os
 
-from settings.config import ConfigParser
+from snookxporter.settings.config import ConfigParser
 
 config_parser = ConfigParser()
 

@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 class ConfigParser:
     def __init__(self):
         root_dir = self.get_root_dir()
-        self.config_path = os.path.join(root_dir, 'settings/config.yaml')
+        self.config_path = os.path.join(root_dir, 'snookxporter/settings/config.yaml')
         self.config = self._get_config()
         logger.debug(f"Using config: {self.config}")
 
@@ -30,9 +30,6 @@ class ConfigParser:
                 players=[ Player(**player) for player in cal['players'] ]
             ) for cal in self.config['calendars']
         ]
-
-    def get_players(self):
-        return [Player(**p) for p in self.config['players']]
 
     @staticmethod
     def get_root_dir():
