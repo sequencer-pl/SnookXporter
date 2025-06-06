@@ -4,8 +4,8 @@
 
 ## 🔧 Requirements
 
-- Python 3.11
-- [Poetry](https://python-poetry.org/)
+- Python 3.13
+- [uv](https://docs.astral.sh/uv/guides/install-python/)
 - Google Calendar API (OAuth credentials required)
 - `make` (optional, for convenient commands)
 
